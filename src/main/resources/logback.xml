@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" debug = "true"  scanPeriod="10 seconds">
+
+  <property name="DEV_HOME" value="log"/>
+
+  <!--***************************************************************************************************************-->
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <charset>utf-8</charset>
+      <Pattern>[%d][%-10level][%-10logger{0}]][%X{requestId}]:%msg%n</Pattern>
+    </encoder>
+  </appender>
+
+  <appender name="server" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>log/server/server.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>log/server/server.log.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+      <maxHistory>10</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>utf-8</charset>
+      <Pattern>[%d][%-10level][%-10logger{0}]][%X{requestId}]:%msg%n</Pattern>
+    </encoder>
+  </appender>
+
+  <!--***************************************************************************************************************-->
+
+  <appender name="server_async" class="ch.qos.logback.classic.AsyncAppender">
+    <queueSize>512</queueSize>
+    <appender-ref ref="server"/>
+  </appender>
+
+  <!--***************************************************************************************************************-->
+
+  <logger name="server" level="INFO" additivity="false"><appender-ref ref="server_async" /></logger>
+  <logger name="server" level="INFO" additivity="false"><appender-ref ref="CONSOLE" /></logger>
+
+  <!--***************************************************************************************************************-->
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="server_async"/>
+  </root>
+
+</configuration>

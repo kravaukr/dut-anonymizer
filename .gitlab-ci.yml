@@ -1,0 +1,3 @@
+include:
+  - project: 'ks-vasdev/devops/gitlab-ci'
+    file: 'projects/cpa/cpa3-icp-charity.yml'
