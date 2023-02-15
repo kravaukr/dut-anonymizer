@@ -3,7 +3,6 @@ package net.dut.anonymizer.api;
 import akka.http.javadsl.model.headers.BasicHttpCredentials;
 import akka.http.javadsl.testkit.JUnitRouteTest;
 import akka.http.javadsl.testkit.TestRoute;
-import net.dut.anonymizer.api.UserAuthenticator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +19,11 @@ public class MainRouteJsonTest extends JUnitRouteTest {
     @Before
     public void init() {
         basicHttpCredentials = createBasicHttpCredentials("admin", "admin");
+        UserAuthenticator userAuthenticator = new UserAuthenticator("admin", "admin");
+
+        testRoute = testRoute(route(
+          new PinRoute(userAuthenticator).route
+        ));
     }
 
     @Test
