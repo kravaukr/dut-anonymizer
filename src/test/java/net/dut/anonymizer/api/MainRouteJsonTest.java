@@ -1,4 +1,4 @@
-package net.kyivstar.icpcharity.api;
+package net.dut.anonymizer.api;
 
 import akka.http.javadsl.model.headers.BasicHttpCredentials;
 import akka.http.javadsl.testkit.JUnitRouteTest;

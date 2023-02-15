@@ -1,9 +1,8 @@
-package net.kyivstar.icpcharity;
+package net.dut.anonymizer;
 
 import akka.http.javadsl.server.HttpApp;
 import akka.http.javadsl.server.Route;
 import com.typesafe.config.Config;
-import net.dut.anonymizer.App;
 import net.dut.anonymizer.api.PinRoute;
 import net.dut.anonymizer.api.UserAuthenticator;
 import org.slf4j.Logger;
